@@ -1,0 +1,19 @@
+$(function(){
+  $("button").click(function(){
+      $(document).ajaxStart(function(){
+        $("#xiaoxi").html("<img src='1.jpg' width='50px' height='50px'/>");
+    });
+    $.ajax({
+      url:"datatijiao.php",
+      data:{
+        title:$("#title").val(),
+        usename:$("#usename").val(),
+        content:$("#content").val()
+      },
+      datatype:"json",
+      type:'POST',   
+      success:function(result){
+      $("#xiaoxi").html(result);
+    }});
+  });
+});

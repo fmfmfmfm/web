@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>采集页面</title>
+	<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.js"></script>
+	<script>
+$(function(){
+$("button").click(function(){
+      $(document).ajaxStart(function(){
+        $("#test").html("<img src='1.jpg' width='500px' height='500px'/>");
+    });
+var url = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+if($("#biao").val()!=""){
+if(!url.test($("#biao").val())){
+  window.alert("请提交正确的链接");
+                return;
+}else if(url.test($("#biao").val())){
+    $.ajax({
+      url:"caiji.php",
+      data:{link:$("#biao").val()},
+      datatype:"json",
+      type:'POST',   
+      success:function(result){
+      $("#test").html(result);
+        }});
+}
+}else{
+   window.alert("链接不能为空");
+                return;
+}
+});
+
+});
+
+</script>
+</head>
+<body>
+请提交链接<input type="text" name="link" id="biao"><br />
+<button>提交</button>
+<p id="test"></p>
+</body>
+</html>
